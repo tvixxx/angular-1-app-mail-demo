@@ -5,22 +5,22 @@
       "from": "fred@dsada.com",
       "to": "me@ya.ru",
       "subject": "Great job",
-      "body": "HOHO! Nice of the book!",
+      "body": "HOHO! Nice of the book! <h1> Hi </h1>",
       "sent_at": "2005-05-13T19:02:05"
     },
     {
       "id": "2",
       "from": "fred@dda.com",
       "to": "m2e@ya.ru",
-      "subject": "Great job",
-      "body": " on the release of the book!",
+      "subject": "WOwo did you see that?",
+      "body": " oLorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis dicta eligendi illum minus non tempore voluptatem. Ad amet asperiores ducimus, error minus nam nemo possimus provident quam qui tenetur veniam?",
       "sent_at": "2015-06-13T18:18:29"
     },
     {
       "id": "3",
       "from": "ed@dsada.com",
       "to": "m3e@ya.ru",
-      "subject": "Great job",
+      "subject": "Great ",
       "body": "Congrats on the release of the book!",
       "sent_at": "2016-08-18T19:52:15"
     },

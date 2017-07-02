@@ -53,6 +53,15 @@ app.controller('MailListingController', ['$scope', '$http',  function($scope, $h
     });
 }]);
 
-app.controller('ContentController', function($scope){
+app.controller('ContentController', ['$scope', function($scope){
+    console.log('hello');
+    $scope.showingReply = false;
 
-});
+    $scope.showReply = function() {
+        $scope.showingReply = true;
+    };
+
+    $scope.cancelReply = function() {
+        $scope.showingReply = false;
+    }
+}]);
