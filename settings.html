@@ -1,0 +1,92 @@
+<h1 class="settings-title section-title">
+    Update your settings
+</h1>
+<form action="" name="form" ng-submit="updateSettings()">
+
+    <fieldset>
+        <legend>Update settings</legend>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-8">
+                    <label for="name_input">Name</label>
+                    <br>
+                    <input type="text"
+                           id="name_input"
+                           placeholder="Name"
+                           ng-model="settings.name"
+                           name="name"
+                           ng-minlength="3"
+                           ng-maxlength="20"
+                           ng-pattern="/^[a-zA-Z]+$/"
+                           required
+                    >
+                    <div ng-if="form.name.$dirty && form.name.$invalid">
+                        <div ng-if="form.name.$error.required">
+                            The name is required
+                        </div>
+                        <div ng-if="form.name.$error.minlength">
+                            The name must  be greater than 3 characters
+                        </div>
+                        <div ng-if="form.name.$error.maxlength">
+                            The name can not be greater than 20 characters
+                        </div>
+                        <div ng-if="form.name.$error.pattern">
+                            The name must contain only characters
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <label for="email_input">Email</label>
+                    <br>
+                    <input type="email"
+                           id="email_input"
+                           placeholder="Email"
+                           name="email"
+                           ng-model="settings.email"
+                    >
+                    <div ng-if="form.email.$dirty && form.email.$invalid">
+                        <div ng-if="form.email.$error.email">
+                            This is not a valid email
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <label for="age_input">Age</label>
+                    <br>
+                    <input type="number"
+                           name="age"
+                           id="age_input"
+                           placeholder="Age"
+                           ng-model="settings.age"
+                           min="3"
+                           max="100"
+                    >
+                    <div ng-if="form.age.$dirty && form.age.$invalid">
+                        <div ng-if="form.age.$error.min">
+                            You must be at least 3 to use this site
+                        </div>
+                        <div ng-if="form.age.$error.max">
+                            Wow easy man, you are so old for this site
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 col-offset-3">
+                    <br>
+                    <button type="submit" class="btn" ng-disabled="form.$dirty && form.$invalid">
+                        Update
+                    </button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+{{ settings }}

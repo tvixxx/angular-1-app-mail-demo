@@ -1,0 +1,17 @@
+{
+  "name": "angular1demo-app",
+  "version": "1.0.0",
+  "description": "none",
+  "main": "angular.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular-route": "^1.2.32"
+  },
+  "devDependencies": {
+    "angular-route": "^1.2.32"
+  }
+}
