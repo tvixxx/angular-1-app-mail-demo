@@ -19,8 +19,12 @@ html, body {
     height: auto;
 }
 
-.main-page .row .ng-view-module {
+.main-page .row .ui-view-module {
     height: 100%;
+}
+
+.nav-tabs>li>a {
+    margin-right: 0;
 }
 
 .ng-pristine {
@@ -126,12 +130,20 @@ input.ng-invalid-minlength.ng-dirty {
     transition: all .15s ease;
     transform: scale(.7);
     z-index: -1;
+    box-shadow: 0 2px 5px 0 rgba(125,125,125, .0);
 }
 
 .mails-module__item:hover:before {
     opacity: 1;
     visibility: visible;
     transform: scale(1.3);
+}
+
+.mails-module__item.active:before {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.3);
+    box-shadow: 0 2px 5px 0 rgba(125,125,125, .2);
 }
 
 
@@ -150,7 +162,7 @@ input.ng-invalid-minlength.ng-dirty {
 }
 
 .mails-module__item + .mails-module__item {
-    margin-top: 30px;
+    margin-top: 12px;
 }
 
 /* MAIL CONTENT MODULE */

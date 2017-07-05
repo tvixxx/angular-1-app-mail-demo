@@ -9,6 +9,7 @@
     <ul class="mails-module__list">
         <li class="mails-module__item" ng-repeat="mail in email"
             ng-click="setSelectedMail(mail)"
+            ng-class="{active: isSelected(mail)}"
         >
             <div class="email-listing"
                  ng-class="{selected: isSelected(mail)}"

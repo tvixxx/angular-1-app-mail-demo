@@ -1,22 +1,24 @@
-var app = angular.module('myApp', ['ngRoute']);
+var app = angular.module('myApp', ['ui.router']);
 
-app.config(function($routeProvider){
-   $routeProvider
-       .when('/', {
-       templateUrl: "./home.html",
-       controller: 'HomeController'
-       })
-       .when('/settings', {
-           templateUrl: "./settings.html",
-           controller: 'SettingsController'
-       })
-       .otherwise({redirectTo: '/'});
+app.config(function($stateProvider, $urlRouterProvider){
+    $urlRouterProvider.otherwise('/');
+
+    $stateProvider
+        .state('home', {
+            url: '/',
+            templateUrl: 'home.html',
+            controller: 'HomeController'
+        })
+        .state('settings', {
+            url: '/settings',
+            templateUrl: 'settings.html'
+        })
 });
 
-app.controller('HomeController', function($scope){
+app.controller('HomeController',['$scope', function($scope){
     $scope.selectedMail;
     $scope.setSelectedMail = function(mail) {
-      $scope.selectedMail = mail;
+        $scope.selectedMail = mail;
     };
 
     $scope.isSelected = function(mail) {
@@ -24,9 +26,9 @@ app.controller('HomeController', function($scope){
             return $scope.selectedMail === mail;
         }
     }
-});
+}]);
 
-app.controller('SettingsController', function($scope){
+app.controller('SettingsController', ['$scope', function ($scope){
     $scope.settings = {
         name: 'Test',
         email: 'example@yandex.ru',
@@ -34,9 +36,10 @@ app.controller('SettingsController', function($scope){
     };
 
     $scope.updateSettings = function() {
-      console.log('updateSettings was called');
+        console.log('updateSettings was called');
     };
-});
+}]);
+
 
 app.controller('MailListingController', ['$scope', '$http',  function($scope, $http){
     $scope.email = [];
@@ -46,6 +49,7 @@ app.controller('MailListingController', ['$scope', '$http',  function($scope, $h
         url: './api/mail/mail.json'
     })
     .success(function(data, status, headers){
+
         $scope.email = data.all;
     })
     .error(function(data, status, headers){
@@ -53,8 +57,8 @@ app.controller('MailListingController', ['$scope', '$http',  function($scope, $h
     });
 }]);
 
+
 app.controller('ContentController', ['$scope', function($scope){
-    console.log('hello');
     $scope.showingReply = false;
 
     $scope.showReply = function() {

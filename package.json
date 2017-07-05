@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "angular-route": "^1.2.32"
+    "angular-route": "^1.2.32",
+    "angular-ui-router": "^1.0.3"
   },
   "devDependencies": {
     "angular-route": "^1.2.32"

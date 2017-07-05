@@ -10,31 +10,30 @@
 </head>
 <body class="main-page">
 
-<div class="container-fluid">
-    <div class="row row--not-full-height">
-        <section class="top-bar-section">
-            <nav class="top-bar">
-                <ul class="nav nav-tabs">
-                    <li role="presentation" class="active">
-                        <a href="#/">Home</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#/settings">Settings</a>
-                    </li>
-                </ul>
-            </nav>
-        </section>
+    <div class="container-fluid">
+        <div class="row row--not-full-height">
+            <section class="top-bar-section">
+                <nav class="top-bar">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" ui-sref-active="active">
+                            <a ui-sref="home">Home</a>
+                        </li>
+                        <li role="presentation" ui-sref-active="active">
+                            <a ui-sref="settings">Settings</a>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+        </div>
+
+        <div class="row">
+            <div class="ui-view-module" ui-view></div>
+        </div>
     </div>
 
-    <div class="row">
-        <div class="ng-view-module" ng-view></div>
-    </div>
-</div>
 
-
-
-<script src="angular.min.js"></script>
-<script src="node_modules/angular-route/angular-route.js"></script>
-<script src="app.js"></script>
+    <script src="angular.min.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
