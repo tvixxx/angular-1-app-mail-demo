@@ -1,101 +1,113 @@
-<div class="col-xs-12 col-sm-3 mails-module"
-     ng-controller="MailListingController"
->
-    <div class="mails-module__title section-title">
-        <h2 class="section-title__h2 section-title__h2--has-border">
-            Mails
-        </h2>
-    </div>
-    <ul class="mails-module__list">
-        <li class="mails-module__item" ng-repeat="mail in email"
-            ng-click="setSelectedMail(mail)"
-            ng-class="{active: isSelected(mail)}"
-        >
-            <div class="email-listing"
-                 ng-class="{selected: isSelected(mail)}"
-            >
-                <div class="email-listing__info">
-                    <span class="email-listing__text">from:</span> {{ mail.from }}
-                </div>
-                <div class="email-listing__info">
-                    <span class="email-listing__text">to:</span> {{ mail.to }}
-                </div>
-            </div>
-        </li>
-    </ul>
-</div>
-<div class="col-xs-12 col-sm-9 mails-content-module"
-     ng-controller="ContentController"
->
-    <div class="mails-content-module__title section-title">
-        <h2 class="section-title__h2 section-title__h2--has-border">
-            Conversation
-        </h2>
+<div style="display: block; height: 100%;" ng-controller="HomeController">
+    <div class="col-xs-12 col-sm-3 mails-module"
+         ng-controller="MailListingController"
+    >
+        <div class="mails-module__title section-title">
+            <h2 class="section-title__h2 section-title__h2--has-border">
+                Mails
+            </h2>
+        </div>
+        <div class="mails-module__filter-years-checkbox">
+            <input class="mails-module__checkbox-filter" ng-model="yearsFilterEnable" id="years_checkbox" type="checkbox">
+            <label class="mails-module__checkbox-label" for="years_checkbox">On years filter</label>
+        </div>
+        <div class="mails-module__input-wrapper">
+            <input ng-disabled="!yearsFilterEnable" class="mails-module__input mails-module__input--years-filter" type="number" placeholder="Filter message by sender" ng-model="nYearsAgo">
+            <input ng-disabled="yearsFilterEnable" class="mails-module__input" type="search" placeholder="Filter message by sender" ng-model="search.from">
+            <input ng-disabled="yearsFilterEnable" class="mails-module__input" type="search" placeholder="Filter message by subject" ng-model="search.subject">
+        </div>
+        <ul class="mails-module__list">
+            <li email-listing
+                email="mail"
+                action="setSelectedMail(selectedMail)"
+                class="mails-module__item"
+                ng-repeat="mail in (email | orderBy:'sent_at':true | filter:search | filter:searchPastNYears)"
+                ng-class="{active: isSelected(mail)}"
+            ></li>
+        </ul>
     </div>
 
-    <div class="mails-content-module__body">
-        <div class="mails-content-module__inner-title section-title" ng-if="!selectedMail">
-            <h3 class="section-title__h3">No conversation selected</h3>
+    <div class="col-xs-12 col-sm-9 mails-content-module"
+         ng-controller="ContentController"
+    >
+        <div class="mails-content-module__title section-title">
+            <h2 class="section-title__h2 section-title__h2--has-border">
+                Conversation
+            </h2>
         </div>
-        <div class="mails-content-module__selected-mail selected-mail" ng-if="selectedMail">
-            <div class="selected-mail__header">
-                <div class="selected-mail__subject">
-                    {{ selectedMail.subject }}
-                </div>
-                <div class="selected-mail__sent-at">
-                    The date is: <span class="selected-mail__sent-at-text">{{ selectedMail.sent_at | date:'MM/dd/yy'}}</span>
-                </div>
-            </div>
-            <div class="selected-mail__actions">
-                <div class="selected-mail__sent-from-to">
-                    <span class="selected-mail__sent-from-to-text">{{ selectedMail.from }}</span>
-                    to
-                    <span class="selected-mail__sent-from-to-text">{{ selectedMail.to }}</span>
-                </div>
-                <div class="selected-mail__btn-wrapper">
-                    <button ng-click="showReply()" class="selected-mail__btn btn btn-primary">Reply</button>
-                </div>
-            </div>
-            <div class="selected-mail__description">
-                <div class="selected-mail__description-content">
-                    <p class="selected-mail__description-header">
-                        The message:
-                    </p>
-                    <p class="selected-mail__description-text" ng-bind="selectedMail.body"></p>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="modal-reply-overlay" ng-class="{'active-overlay': showingReply}"></div>
-    <div class="modal-reply" ng-if="showingReply">
-        <form id="replyForm" action="" ng-submit="sendEmailReply()" >
-            <div>
+        <div class="mails-content-module__body">
+            <div class="mails-content-module__inner-title section-title" ng-if="!selectedMail">
+                <h3 class="section-title__h3">No conversation selected</h3>
+            </div>
+            <div class="mails-content-module__selected-mail selected-mail" ng-if="selectedMail">
+                <div class="selected-mail__header">
+                    <div class="selected-mail__subject">
+                        {{ selectedMail.subject }}
+                    </div>
+                    <div class="selected-mail__sent-at">
+                        The date is: <span class="selected-mail__sent-at-text">{{ selectedMail.sent_at | date:'MM/dd/yy'}}</span>
+                    </div>
+                </div>
+                <div class="selected-mail__actions">
+                    <div class="selected-mail__sent-from-to">
+                        <span class="selected-mail__sent-from-to-text">{{ selectedMail.from }}</span>
+                        to
+                        <span class="selected-mail__sent-from-to-text">{{ selectedMail.to }}</span>
+                    </div>
+                    <div class="selected-mail__btn-wrapper">
+                        <button ng-click="showReply()" class="selected-mail__btn btn btn-primary">Reply</button>
+                    </div>
+                </div>
+                <div class="selected-mail__description">
+                    <div class="selected-mail__description-content">
+                        <p class="selected-mail__description-header">
+                            The message:
+                        </p>
+                        <p class="selected-mail__description-text" ng-bind="selectedMail.body"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="modal-reply-overlay" ng-class="{'active-overlay': showingReply}"></div>-->
+        <div class="modal-reply" ng-if="showingReply">
+            <form id="replyForm" action="" ng-submit="sendEmailReply()" >
                 <div>
-                    <span class="prefix">To</span>
+                    <div>
+                        <span class="prefix">To</span>
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <input type="email"
-                       ng-model="reply.to"
-                       ng-minlength="3"
-                       ng-maxlength="200"
-                       placeholder="Email"
-                >
-            </div>
+                <div>
+                    <input type="email"
+                           ng-model="reply.to"
+                           ng-minlength="3"
+                           ng-maxlength="200"
+                           placeholder="Email"
+                    >
+                </div>
 
-            <div>
+                <div>
                     <textarea ng-model="reply.body">
                         {{ reply.body }}
                     </textarea>
-            </div>
+                </div>
 
-            <div class="wrapper">
-                <button class="button btn btn-primary" ng-click="sendReply()">Send</button>
-                <button class="button btn" ng-click="cancelReply()">Cancel</button>
-            </div>
-        </form>
+                <div class="wrapper">
+                    <button class="button btn btn-primary" ng-click="sendReply()">Send</button>
+                    <button class="button btn" ng-click="cancelReply()">Cancel</button>
+                </div>
+
+                <div ng-if="loading">
+                    loading..
+                </div>
+
+                <div ng-if="errorText.length">
+                    {{errorText}}
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

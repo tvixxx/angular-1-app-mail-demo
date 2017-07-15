@@ -1,0 +1,14 @@
+<div class="email-listing"
+     ng-click="handleClick(email)"
+     ng-class="{selected: isSelected(mail)}"
+>
+    <div class="email-listing__info">
+        <span class="email-listing__text">from:</span> {{ email.from }}
+    </div>
+    <div class="email-listing__info">
+        <span class="email-listing__text">to:</span> {{ email.to }}
+    </div>
+    <div class="email-listing-info">
+        <p class="email-listing__text"> {{ email.subject }} </p>
+    </div>
+</div>
